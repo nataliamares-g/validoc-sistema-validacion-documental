@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>VALIDOC | Acceso</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="login-body">
+<main class="login-card">
+  <h1>VALIDOC</h1>
+  <p>Sistema de Validación Documental con Código QR</p>
+  <div class="notice" th:if="${param.error}">Correo o contraseña incorrectos.</div>
+  <div class="success" th:if="${param.logout}">Sesión cerrada.</div>
+  <form th:action="@{/login}" method="post">
+    <label>Correo
+      <input name="username" type="email" required>
+    </label>
+    <label>Contraseña
+      <input name="password" type="password" required>
+    </label>
+    <button type="submit">Iniciar sesión</button>
+  </form>
+</main>
+</body>
+</html>
