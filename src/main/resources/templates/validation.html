@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Validación pública | VALIDOC</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="validation-body">
+<main class="validation-card" th:if="${found}" th:classappend="${' validation-' + #strings.toLowerCase(document.status.name())}">
+  <h1>Validación documental</h1>
+
+  <section th:if="${document.status.name() == 'VIGENTE'}">
+    <div class="public-status valid">DOCUMENTO VÁLIDO</div>
+    <p class="status-explanation">El documento está registrado y se encuentra vigente en la plataforma.</p>
+  </section>
+  <section th:if="${document.status.name() == 'REVOCADO'}">
+    <div class="public-status revoked">DOCUMENTO REVOCADO</div>
+    <p class="status-explanation warning">Atención: este documento fue revocado y ya no debe considerarse vigente.</p>
+  </section>
+  <section th:if="${document.status.name() == 'CANCELADO'}">
+    <div class="public-status cancelled">DOCUMENTO CANCELADO</div>
+    <p class="status-explanation warning">Atención: este documento fue cancelado y no es válido para su uso.</p>
+  </section>
+
+  <h2 th:text="${document.title}"></h2>
+  <dl class="validation-data">
+    <dt>Folio</dt><dd th:text="${document.folio}"></dd>
+    <dt>Tipo</dt><dd th:text="${document.documentType}"></dd>
+    <dt>Área emisora</dt><dd th:text="${document.issuerArea}"></dd>
+    <dt>Fecha de registro</dt><dd th:text="${#temporals.format(document.createdAt,'dd/MM/yyyy HH:mm')}"></dd>
+  </dl>
+</main>
+
+<main class="validation-card validation-not-found" th:unless="${found}">
+  <h1>Validación documental</h1>
+  <div class="public-status not-found">DOCUMENTO NO ENCONTRADO</div>
+  <p class="status-explanation warning">El folio consultado no está registrado en la plataforma. Verifica que el enlace o el código QR sea correcto.</p>
+</main>
+</body>
+</html>

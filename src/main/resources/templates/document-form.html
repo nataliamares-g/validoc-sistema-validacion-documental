@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar documento | VALIDOC</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+  <b>VALIDOC</b>
+  <span><a th:href="@{/}">Inicio</a><a th:href="@{/documentos}">Documentos</a><form class="logout-form" th:action="@{/logout}" method="post"><button class="logout-button" type="submit">Salir</button></form></span>
+</nav>
+<main class="container">
+  <h1>Registrar documento</h1>
+  <div class="notice" th:if="${error}" th:text="${error}"></div>
+  <form class="form" th:action="@{/documentos}" method="post" enctype="multipart/form-data">
+    <label>Título del documento
+      <input name="title" maxlength="150" required>
+    </label>
+    <label>Tipo de documento
+      <select name="documentType" required>
+        <option>Constancia</option><option>Oficio</option><option>Certificado</option><option>Informe</option><option>Otro</option>
+      </select>
+    </label>
+    <label>Área emisora o responsable
+      <input name="issuerArea" maxlength="150" required>
+    </label>
+    <label>Archivo PDF
+      <input name="pdf" type="file" accept="application/pdf" required>
+    </label>
+    <label>Posición del QR
+      <select name="qrPosition" required>
+        <option th:each="p:${positions}" th:value="${p}" th:text="${#strings.replace(p.name(),'_',' ')}"></option>
+      </select>
+    </label>
+    <button>Generar documento</button>
+  </form>
+</main>
+</body>
+</html>
