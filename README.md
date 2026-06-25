@@ -56,6 +56,4 @@ No uses `docker compose down -v` si deseas conservar la base de datos y los docu
 | admin@validoc.mx | Admin123* |
 | capturista@validoc.mx | Captura123* |
 
-## Nota sobre la URL pública
 
-Cloudflare Quick Tunnel se usa para demostrar el QR desde un celular. Su dirección es temporal y puede cambiar cuando se reinician los servicios. Para un sistema permanente se debe usar un dominio y un túnel administrado, o desplegar la aplicación en un servidor público.
